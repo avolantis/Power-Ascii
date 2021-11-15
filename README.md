@@ -1,4 +1,4 @@
-# Ascii Splash Screen
+# Power ASCII
  
 **This script will simply print out a random Ascii Art to your terminal screen whenever you launch the terminal.**
 
