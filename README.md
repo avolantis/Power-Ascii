@@ -18,7 +18,7 @@ b. You does not currently has a profile
 > echo $PROFILE
 
 # With the following command you can create your profile file with no content
-> echo '' > DIRECTORY_FROM_PREVIOUS_COMMAND
+> New-Item -ItemType File -Force -Path DIRECTORY_FROM_PREVIOUS_COMMAND
 ```
 
 ## Setup PowerShell Profile
@@ -72,3 +72,7 @@ function Get-Random-Art()
 }
 FancyWritter (Get-Random-Art)
 ```
+
+Thanks to [DanCRichards](https://github.com/DanCRichards)
+
+Based on [DanCRichards/ASCII-Art-Splash-Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen)
