@@ -1,4 +1,10 @@
-﻿function FancyWritter([string]$Text){
+# ------------------------------------- #
+# Author : Balogh Zoltán Sándor         #
+# License : MIT                         #
+# CreatedOn : 2021-11-15                #
+# ------------------------------------- #
+
+function FancyWritter([string]$Text){
     $Text.ToCharArray() | ForEach-Object{
         switch -Regex ($_){
             "`r"{break}
@@ -40,4 +46,3 @@ function Print-Random-Art([Nullable[bool]]$colorized)
     }
 }
 
-Print-Random-Art -colorized 1
