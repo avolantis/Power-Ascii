@@ -27,15 +27,13 @@ b. You does not currently have a profile
 
 Put the following code somewhere to your profile
 ```PowerShell
-function Get-Random-Art()
-{
-    $number = Get-Random 60
-    $response = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zozobalogh0817/ascii-splash-screen/master/art/$number.txt"
-    $art = $response.Content
-    return $art
-}
-
-Write-Host (Get-Random-Art)
+$code = 
+@"
+Print-Random-Art -colorized 1
+"@
+$Script = Invoke-WebRequest 'https://raw.githubusercontent.com/zozobalogh0817/Power-Ascii/master/power_ascii.ps1'
+$ScriptBlock = [Scriptblock]::Create($Script.Content + $code)
+Invoke-Command -ScriptBlock $ScriptBlock
 ```
 Save your profile then restart your PowerShell, or type the following command
 
@@ -46,43 +44,34 @@ Save your profile then restart your PowerShell, or type the following command
 
 #### You ready to rock.
 
+## Methods
 
-## LITTLE EXTRA
+`Get-Random-Art` - This method will return a Random Ascii Art from sixty variety
+> **Arguments:** This method does not take any arguments
 
-> If you want you could use the following method to print out the Ascii Art
+`Print-Random-Art` - This method will Print a Random Ascii Art from sixty variety
+> **Arguments:** [boolean] colorized
 
-Just simply put the following code somewhere to your profile
-```powershell
-function FancyWritter([string]$Text){
-    $Text.ToCharArray() | ForEach-Object{
-        switch -Regex ($_){
-            "`r"{break}
-            "`n"{Write-Host " "; break}
-            "[^ ]"{
-                $writeHostOptions = @{
-                    # ForegroundColor = ([system.enum]::GetValues([system.consolecolor])) | get-random
-                    NoNewLine = $true
-                }
-                Write-Host $_ @writeHostOptions
-                break
-            }
-            " "{Write-Host " " -NoNewline}
-        } 
-    }
-}
+## How to use custom methods 
 
-function Get-Random-Art()
-{
-    $number = Get-Random 60
-    $response = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zozobalogh0817/ascii-splash-screen/master/art/$number.txt"
-    $art = $response.Content
-    return $art
-}
-FancyWritter (Get-Random-Art)
+Put your custom code inside the code variable
+Like the following
 ```
+$code = 
+@"
+# Uncolorized Art
+Print-Random-Art -colorized 0
+# Colorized Art
+Print-Random-Art -colorized 1
+# Get Random Art then write with Write-Host
+Write-Host (Get-Random-Art)
+"@
+```
+This will write the Ascii Art to the console.
 
-Thanks to [DanCRichards](https://github.com/DanCRichards)
 
-Based on [DanCRichards/ASCII-Art-Splash-Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen)
+#### Thanks to [DanCRichards](https://github.com/DanCRichards)
+
+##### Based on [DanCRichards/ASCII-Art-Splash-Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen)
 
 > Do not use this script for too serious things
